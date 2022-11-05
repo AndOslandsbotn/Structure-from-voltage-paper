@@ -122,6 +122,9 @@ zlabel('z-axis', 'FontSize', fontsize);
 xlim([mins(1), maxs(1)]);
 ylim([mins(2), maxs(2)]);
 zlim([mins(3), maxs(3)]);
+
+yticks([0.2, 0.5, 0.8]);
+
 view(view1, view2);
 grid off
 %ax = gca;
@@ -169,6 +172,13 @@ zlabel('z-axis', 'FontSize', fontsize);
 xlim([mins(1), maxs(1)]);
 ylim([mins(2), maxs(2)]);
 zlim([mins(3), maxs(3)]);
+if nlm == 3;
+xticks([-0.6, 0, 0.4]);
+elseif nlm == 5;
+yticks([0.3, 0.5, 0.7]);
+elseif nlm == 7;
+yticks([-0.2, 0.0, 0.4]);
+end
 view(view1, view2);
 grid off
 %ax = gca;

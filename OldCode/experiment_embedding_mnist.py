@@ -10,7 +10,6 @@ from utilities.data_io import save_config
 import matplotlib
 import matplotlib.pyplot as plt
 
-
 def save_experiment(data, target, mds_emb, v_emb, idx_lms, idx_sources, folder):
     print("Save experiment")
     filepath = os.path.join('Results', folder)
@@ -66,10 +65,11 @@ if __name__ == '__main__':
 
     # Choose landmark(s)
     idx_lms = np.random.choice(np.arange(0, len(mnistdata_subset)), size=nlm).reshape(-1,1)
+    print("idx_lms: ", idx_lms)
     #lms2, idx_lms2 = select_landmarks_mnist_standard(mnistdata, indices_selected_digits, num_lm_per_digit)
 
     n_mnist = len(mnistdata_subset)
-    lm = mnistdata_subset[lm_idx]
+    lm = mnistdata_subset[idx_lms]
     v_embedding, source_indices = voltage_embedding(mnistdata_subset, lm, n_mnist, bw, rs, rhoG,
                                                     config, is_visualization=True)
     mds_embedding = multi_dim_scaling(v_embedding)

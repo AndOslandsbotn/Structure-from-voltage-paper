@@ -2,7 +2,7 @@ import numpy as np
 from scipy.spatial.distance import cdist
 
 from utilities.voltage_solver import apply_voltage_constraints, propagate_voltage
-from utilities.matrices import construct_W_matrix
+from utilities.matrices import construct_W_matrix, construct_Wtilde_matrix
 from utilities.util import get_nn_indices
 from tqdm import tqdm
 
@@ -19,19 +19,23 @@ def voltage_embedding(x, lms, n, bw, rs, rhoG, config, is_visualization=False):
     """
     voltages = []
     source_indices_l = []
-    matrix = construct_W_matrix(x, n, bw, rhoG, config) # Construct the adjacency matrix W
+    if not config['is_Wtilde']:
+        matrix = construct_W_matrix(x, n, bw, rhoG, config) # Construct the adjacency matrix W
     for lm in tqdm(lms, desc='Loop landmarks'):
         # Get indices of all points in x that are distance $r_s$ from the landmark lm
         source_indices, _ = get_nn_indices(x, lm.reshape(1, -1), rs)
         source_indices = list(source_indices[0])
         source_indices_l.append(source_indices)
 
+        if config['is_Wtilde']:
+            matrix = construct_Wtilde_matrix(x, n, source_indices, bw, rhoG, config)
+
         # Initialize a voltage vector, with source and ground constraints applied
         init_voltage = np.zeros(n + 1)
         init_voltage = apply_voltage_constraints(init_voltage, source_indices)
 
         # Propagate the voltage to all points in the dataset
-        voltages.append(propagate_voltage(init_voltage, matrix, config['max_iter'],
+        voltages.append(propagate_voltage(init_voltage, matrix, matrix, config['max_iter'],
                                           source_indices, config['is_Wtilde'],
                                           is_visualization))
     return np.array(voltages).transpose(), source_indices_l

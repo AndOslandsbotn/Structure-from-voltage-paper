@@ -1,4 +1,6 @@
 from tqdm import tqdm
+from utilities.matrices import construct_W_matrix
+from sklearn.metrics import mean_squared_error
 
 def apply_voltage_constraints(voltage, source_indices):
     """Apply the source and ground voltage constraints to the voltage vector
@@ -24,7 +26,7 @@ def propagate_voltage(v, matrix, max_iter, source_indices, is_Wtilde=False, is_v
         else:
             v = matrix.dot(v)
             v = apply_voltage_constraints(v, source_indices)
-    if is_visualization:
+    if is_visualization and is_Wtilde==False:
         # For visualization purposes we apply the propagation 1 more time without setting source to 1
         v = matrix.dot(v)
     return v
