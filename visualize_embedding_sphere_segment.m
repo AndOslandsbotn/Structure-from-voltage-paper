@@ -1,6 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 view1 = 20
 view2 = -25
+
 fontsize = 40;
 axis_number_size = 20;
 
@@ -12,14 +13,16 @@ color_darkgray = '#838B8B'
 ms_ll = 7; % Marker size on longitudes and latitudes
 ms_surf = 3 % Marker size on surface
 
-nlm = 9;
+nlm = 3;
 theta_max = 90;
 phi_max = 180;
 %exp_name='MnistNlmPerDigit1_expnr1'
 exp_name = strcat('SphereTheta', num2str(theta_max), 'Phi', num2str(phi_max), 'nlm', num2str(nlm));
-folder = strcat('ResultsPaper/', exp_name);
+%folder = strcat('ResultsPaper/', exp_name);
+folder = strcat('Results/', exp_name);
 
-save_figures = strcat('Figures/', exp_name)
+
+save_figures = strcat('Figures2/', exp_name)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -136,6 +139,8 @@ saveas(fig3, strcat(save_figures, 'Ref'), 'epsc');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MDS Embedding sphere scatter %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%view1=160;
+%view2=160;
 maxs = max(mds_emb, [], 1);
 mins = min(mds_emb, [], 1);
 eps = 0.5;

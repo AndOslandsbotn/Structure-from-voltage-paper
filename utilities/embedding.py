@@ -35,7 +35,7 @@ def voltage_embedding(x, lms, n, bw, rs, rhoG, config, is_visualization=False):
         init_voltage = apply_voltage_constraints(init_voltage, source_indices)
 
         # Propagate the voltage to all points in the dataset
-        voltages.append(propagate_voltage(init_voltage, matrix, matrix, config['max_iter'],
+        voltages.append(propagate_voltage(init_voltage, matrix, config['max_iter'],
                                           source_indices, config['is_Wtilde'],
                                           is_visualization))
     return np.array(voltages).transpose(), source_indices_l

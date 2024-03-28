@@ -26,7 +26,9 @@ def propagate_voltage(v, matrix, max_iter, source_indices, is_Wtilde=False, is_v
         else:
             v = matrix.dot(v)
             v = apply_voltage_constraints(v, source_indices)
-    if is_visualization and is_Wtilde==False:
+    v = matrix.dot(v)
+
+    #if is_visualization and is_Wtilde==False:
         # For visualization purposes we apply the propagation 1 more time without setting source to 1
-        v = matrix.dot(v)
+    #    v = matrix.dot(v)
     return v

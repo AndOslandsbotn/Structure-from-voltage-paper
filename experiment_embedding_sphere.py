@@ -25,6 +25,18 @@ def plot_domain3D(x, lm_indices_all_lm, radius, title):
     ax.set_zlabel('Z-axis')
     ax.view_init(-0, 0)
 
+def plot_domain2D(x, lm_indices_all_lm, radius, title):
+    fig = plt.figure()
+    plt.title(title)
+    ax = fig.add_subplot()
+    ax.scatter(x[:-1, 0], x[:-1, 2], c=radius)
+    for lm_indices in lm_indices_all_lm:
+        ax.scatter(x[lm_indices, 0],
+                    x[lm_indices, 2],
+                    marker='s', c='red')
+    ax.set_xlabel('X-axis')
+    ax.set_ylabel('Y-axis')
+
 def save_experiment(ss, mds_emb, v_emb, idx_lm, idx_lat, idx_long, folder):
     filepath = os.path.join('Results', folder)
     Path(filepath).mkdir(parents=True, exist_ok=True)
@@ -68,12 +80,16 @@ if __name__ == '__main__':
     n = 2 ** 15
 
     # Variables
+    #bw = 0.1  # Bandwidth
+    #rhoG = 1.e-5  # Inverse of resistance to ground
+    #rs = 0.2  # Source radius
+
     bw = 0.1  # Bandwidth
-    rhoG = 1.e-5  # Inverse of resistance to ground
-    rs = 0.2  # Source radius
+    rhoG = 1.e-6  # Inverse of resistance to ground
+    rs = 0.05  # Source radius
 
     # Number of landmarks (sources)
-    nlm = 5
+    nlm = 3
 
     ExpFolder = f'SphereTheta{theta_max}Phi{phi_max}nlm{nlm}'
     ###############################################
@@ -91,12 +107,14 @@ if __name__ == '__main__':
                                                     config, is_visualization=True)
     mds_embedding = multi_dim_scaling(v_embedding)
 
+
+
     # Use orthogonal procrustes analysis to rotate and translate the MDS embedding to best fit the original orientation
     mds_embedding_rot = orth_procrustes_edm_to_x(sphere_section.transpose(), mds_embedding[:-1, :-1].transpose(), len(sphere_section), 6)
     mds_embedding_rot = mds_embedding_rot.transpose()
 
     save_experiment(sphere_section, mds_embedding[:, 0:3], v_embedding, source_indices, idx_lat, idx_long, folder=ExpFolder)
-    save_experiment(sphere_section, mds_embedding_rot, v_embedding, source_indices, idx_lat, idx_long, folder=ExpFolder)
+    #save_experiment(sphere_section, mds_embedding_rot, v_embedding, source_indices, idx_lat, idx_long, folder=ExpFolder)
 
     # Visualize
     # Visualize
@@ -110,4 +128,6 @@ if __name__ == '__main__':
     plot_domain3D(v_embedding, source_indices, v_embedding[0:n_ss, 0], title='Sphere segment with voltage vector')
     plot_domain3D(mds_embedding, source_indices, v_embedding[0:n_ss, 0], title='Sphere segment with MDS vectors')
     plot_domain3D(mds_embedding_rot, source_indices, v_embedding[0:n_ss-1, 0], title='Sphere segment with rotated MDS vectors')
+
+    plot_domain2D(mds_embedding_rot, source_indices, v_embedding[0:n_ss-1, 0], title='2d')
     plt.show()

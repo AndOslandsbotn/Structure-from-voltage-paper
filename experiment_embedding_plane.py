@@ -39,7 +39,7 @@ if __name__ == '__main__':
     ###############################################
 
     # Load plane
-    n = 2**12
+    n = 2**5
     plane = sample_2d_unit_square(n, eps=10**(-3))
 
     # Make embedding
