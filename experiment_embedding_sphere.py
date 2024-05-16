@@ -89,10 +89,10 @@ if __name__ == '__main__':
     #rs = 0.05  # Source radius
 
     # Number of landmarks (sources)
-    nlm = 5
+    nlm = 3
 
-    #ExpFolder = os.path.join('Results16may2024smallRadius', f'SphereTheta{theta_max}Phi{phi_max}nlm{nlm}')
-    ExpFolder = os.path.join('Results16may2024largeRadius', f'SphereTheta{theta_max}Phi{phi_max}nlm{nlm}')
+    ExpFolder = os.path.join('Results16may2024smallRadius', f'SphereTheta{theta_max}Phi{phi_max}nlm{nlm}')
+    #ExpFolder = os.path.join('Results16may2024largeRadius', f'SphereTheta{theta_max}Phi{phi_max}nlm{nlm}')
     ###############################################
 
     theta_grid = np.arange(theta_min+step, theta_max+step, 10)
