@@ -57,11 +57,12 @@ def save_experiment(ss, mds_emb, v_emb, idx_lm, idx_lat, idx_long, folder):
 
 if __name__ == '__main__':
     ###############################################
-    theta_max  = 90
+    theta_max = 150 #90
     theta_min = 0
     phi_max = 180
     phi_min = 0
     step = 10
+
     limits = {'theta_min': theta_min,
               'theta_max': theta_max,
               'phi_min': phi_min,
@@ -89,10 +90,10 @@ if __name__ == '__main__':
     #rs = 0.05  # Source radius
 
     # Number of landmarks (sources)
-    nlm = 3
+    nlm = 5
 
-    ExpFolder = os.path.join('Results16may2024smallRadius', f'SphereTheta{theta_max}Phi{phi_max}nlm{nlm}')
-    #ExpFolder = os.path.join('Results16may2024largeRadius', f'SphereTheta{theta_max}Phi{phi_max}nlm{nlm}')
+    #ExpFolder = os.path.join('Results16may2024smallRadius', f'SphereTheta{theta_max}Phi{phi_max}nlm{nlm}')
+    ExpFolder = os.path.join('Results16may2024largeRadius', f'SphereTheta{theta_max}Phi{phi_max}nlm{nlm}')
     ###############################################
 
     theta_grid = np.arange(theta_min+step, theta_max+step, 10)

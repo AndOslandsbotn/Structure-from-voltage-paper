@@ -13,7 +13,7 @@ color_darkgray = '#838B8B'
 ms_ll = 7; % Marker size on longitudes and latitudes
 ms_surf = 3 % Marker size on surface
 
-nlm = 5;
+nlm = 3;
 theta_max = 90; %90;
 phi_max = 180;
 %exp_name='MnistNlmPerDigit1_expnr1'

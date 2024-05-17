@@ -49,8 +49,8 @@ def plot_domain3D(x, lm_indices_all_lm, radius, title):
 
 if __name__ == '__main__':
     m = 3 # Number of landmarks
-    #filepath = f'Results16may2024smallRadius/SphereTheta90Phi180nlm{m}'
-    filepath = f'Results16may2024largeRadius/SphereTheta90Phi180nlm{m}'
+    filepath = f'Results16may2024smallRadius/SphereTheta90Phi180nlm{m}'
+    #filepath = f'Results16may2024largeRadius/SphereTheta90Phi180nlm{m}'
     mds_emb, v_emb, lm_indices_all_lm = load_data(filepath)
     radius = v_emb[0:len(mds_emb)-1, 0]
     plot_domain3D(mds_emb, lm_indices_all_lm, radius, title=f'sphere embedding with {m} landmarks')

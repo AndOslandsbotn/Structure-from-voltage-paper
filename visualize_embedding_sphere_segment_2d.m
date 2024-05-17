@@ -12,13 +12,15 @@ color_darkgray = '#838B8B'
 ms_ll = 3; % Marker size on longitudes and latitudes
 ms_surf = 3 % Marker size on surface
 
-nlm = 7;
+nlm = 3;
 theta_max = 90;
 phi_max = 180;
 %exp_name='MnistNlmPerDigit1_expnr1'
-exp_name = strcat('SphereTheta', num2str(theta_max), 'Phi', num2str(phi_max), 'nlm', num2str(nlm),'_ss');
-%folder = strcat('ResultsPaper/', exp_name);
-folder = strcat('Results/', exp_name);
+%exp_name = strcat('SphereTheta', num2str(theta_max), 'Phi', num2str(phi_max), 'nlm', num2str(nlm),'_ss');
+exp_name = strcat('SphereTheta', num2str(theta_max), 'Phi', num2str(phi_max), 'nlm', num2str(nlm));
+folder = strcat('ResultsPaper/', exp_name);
+%folder = strcat('Results/', exp_name);
+%folder = strcat('Results16may2024largeRadius/', exp_name);
 
 save_figures = strcat('Figures2/', exp_name)
 
